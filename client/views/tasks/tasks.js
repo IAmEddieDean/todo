@@ -2,6 +2,33 @@
 
 angular.module('checkList')
 .controller('TasksCtrl', ['$scope', 'Task', '$window', function($scope, Task, $window){
+  $scope.afTasks = Task.init();
+
+
+  $scope.sort = function(sortString){
+    var modifier = ($scope.taskOrder === sortString) ? '-' : '';
+    $scope.taskOrder = modifier + sortString;
+  };
+
+
+
+  $scope.toggleComplete = function(task){
+    Task.save(task);
+  };
+  
+  $scope.saveEdit = function(task){
+    $scope.task = {};
+    task.dueDate = task.dueDate.getTime();
+    Task.save(task);
+  };
+  $scope.editTask = function(task){
+    var t = task;
+    t.dueDate = new Date(task.dueDate);
+    $scope.task = t;
+  };
+  $scope.deleteTask = function(task){
+    Task.destroy(task);
+  };
   $scope.addTask = function(task){
     var t ={
       title: task.title,
@@ -10,10 +37,9 @@ angular.module('checkList')
       isComplete: false,
       createdAt: $window.Firebase.ServerValue.TIMESTAMP
     };
-    
     Task.add(t)
-    .then(function(data){
-      console.log(data);
+    .then(function(){
+      $scope.task = {};
     });
   };
 }]);

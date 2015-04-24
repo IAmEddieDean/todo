@@ -1,6 +1,6 @@
 h3 Welcome to the shit list
 .row
-  .col-6-sm.col-sm-offset-3
+  .col-6-sm 
     form(name='taskForm', novalidate)
       .form-group
         label(for='title') Title
@@ -14,17 +14,27 @@ h3 Welcome to the shit list
           option Low
           option Medium
           option High
-      .form-group
+      .form-group(ng-hide='task.$id')
         button.btn.btn-warning(ng-click='addTask(task)') Add Task
-  .col-3-sm
-    p peace
-    p peace
-    p peace
-    p peace
-    p peace
-    p peace
-    p peace
-    p peace
-    p peace
-    p peace
-    p peace
+      .form-group(ng-show='task.$id')
+        button.btn.btn-danger(ng-click='saveEdit(task)') Save Edit
+    table.table.table-striped
+      thead
+        tr
+          th Edit
+          th Delete
+          th(ng-click='sort("title")') Title
+          th(ng-click='sort("title")') Due Date
+          th(ng-click='sort("priority")') Priority
+          th(ng-click='sort("isComplete")') Complete?
+          th(ng-click='sort("createdAt")') Created On
+      tbody
+        tr(ng-repeat='task in afTasks | orderBy:taskOrder', ng-class='{completed: task.isComplete}')
+          td: button.btn.btn-info.btn-xs(ng-click='editTask(task)') Edit
+          td: button.btn.btn-danger.btn-xs(ng-click='deleteTask(task)') Delete
+          td {{task.title}}
+          td {{task.dueDate | date: medium}}
+          td {{task.priority}}
+          td: input(type='checkbox', ng-model='task.isComplete', ng-click='toggleComplete(task)')
+            
+          td {{task.createdAt | date: mmDDhhMM}}
