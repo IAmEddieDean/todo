@@ -5,10 +5,12 @@ angular.module('checkList', ['firebase', 'ui.router'])
   $urlRouterProvider.otherwise('/');
   
   $stateProvider.state('about',{url: '/about', templateUrl: '/views/home/about.html'})
-  .state('home',{url: '/', templateUrl: '/views/home/home.html'})
-  .state('faq',{url: 'faq', templateUrl: '/views/home/faq.html'})
-  .state('register',{url: '/register', templateUrl: '/views/users/users.html', controller: 'UsersCtrl'})
-  .state('contact',{url: '/contact', templateUrl: '/views/home/contact.html'});
+  .state('home', {url: '/', templateUrl: '/views/home/home.html'})
+  .state('faq', {url: 'faq', templateUrl: '/views/home/faq.html'})
+  .state('register', {url: '/register', templateUrl: '/views/users/users.html', controller: 'UsersCtrl'})
+  .state('contact', {url: '/contact', templateUrl: '/views/home/contact.html'})
+  .state('login', {url: '/login', templateUrl: '/views/users/users.html', controller: 'UsersCtrl'})
+  .state('tasks', {url: '/tasks', templateUrl: '/views/tasks/tasks.html', controller: 'TasksCtrl'});
 }])
 .run(['$rootScope', '$window', '$firebaseAuth', 'firebaseUrl', function($rootScope, $window, $firebaseAuth, firebaseUrl){
   $rootScope.fbRoot = new $window.Firebase(firebaseUrl);

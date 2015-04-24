@@ -1,0 +1,30 @@
+h3 Welcome to the shit list
+.row
+  .col-6-sm.col-sm-offset-3
+    form(name='taskForm', novalidate)
+      .form-group
+        label(for='title') Title
+        input.form-control#title(name='title', type='text', ng-model='task.title')
+      .form-group
+        label(for='dueDate') Due Date
+        input.form-control#dueDate(name='dueDate', type='date', ng-model='task.dueDate')
+      .form-group
+        label(for='priority') Priority
+        select.form-control#priority(name='priority', ng-model='task.priority')
+          option Low
+          option Medium
+          option High
+      .form-group
+        button.btn.btn-warning(ng-click='addTask(task)') Add Task
+  .col-3-sm
+    p peace
+    p peace
+    p peace
+    p peace
+    p peace
+    p peace
+    p peace
+    p peace
+    p peace
+    p peace
+    p peace
